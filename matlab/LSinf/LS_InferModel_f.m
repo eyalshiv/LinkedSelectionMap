@@ -4,8 +4,8 @@ function [calc, maps, outcalc]  = LS_InferModel_f( outfile_pref, files_invar_fil
 % files_invar   = file2struct( files_invar_file );
 % files_buildGE = file2struct( files_buildGE_file );
 cfg_inf       = file2struct( cfg_file );
-cfg_inf.GEs.CalcSW.skip_generate_maps = 1; % temporary(?), just for safety
-cfg_inf.GEs.CalcBS.skip_generate_maps = 1; % temporary(?), just for safety
+% cfg_inf.GEs.CalcSW.skip_generate_maps = 1; % temporary(?), just for safety
+% cfg_inf.GEs.CalcBS.skip_generate_maps = 1; % temporary(?), just for safety
 
 
 nvdata            = LS_LoadVariationData(    files_invar_file );
@@ -14,9 +14,7 @@ masks             = LS_SetGenomicMask(       files_codonmask_file, cfg_inf );
 calc              = LS_InferModel(           outfile_pref, nvdata, GEs, cfg_inf.inf, masks.inference );
 
 ii = calc.best_iter;
-if ii==-1
-  ii = size(calc.params,1);
-end
+assert(ii~=-1, 'inference failed');
 params = calc.params(ii,:);
 
 maps = LS_DrawMap(              outfile_pref, params, GEs, [], cfg_inf );

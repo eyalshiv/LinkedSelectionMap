@@ -118,41 +118,41 @@ if ~isempty(SW_anno_files)
     CalcSW.rec_table_scale = 10^-8;
     
     for b=1:length(SW_anno_files{c})
-      
-      CalcSW.output_token = Annots.SW{c}{b}.output_token; %SW_anno_tokens{b};
-      CalcSW.focals_table = Annots.SW{c}{b}.file; %SW_anno_files{c}{b};
-      CalcSW.name         = [genmap{c}.name '_' Annots.SW{c}{b}.name];
-      grid_file_pref = sprintf('%s/%s%s', outdir, outfile_pref, CalcSW.name);
-      
-%       Annots.SW{c}{b}.file                                        = CalcSW.focals_table;
-%       [Annots.SW{c}{b}.focals.pos, Annots.SW{c}{b}.focals.strand, Annots.SW{c}{b}.focals.isfake] = ...
-%         textread( Annots.SW{c}{b}.file, '%d\t%c\t%d', 'commentstyle', 'shell' );
-%       Annots.SW{c}{b}.focals.gpos  = applyGenmap2pos( genmap{c}, Annots.SW{c}{b}.focals.pos );
-      
-      if ~CalcSW.skip_generate_maps
+      if ~isempty(SW_anno_files{c}{b})
+        CalcSW.output_token = Annots.SW{c}{b}.output_token; %SW_anno_tokens{b};
+        CalcSW.focals_table = Annots.SW{c}{b}.file; %SW_anno_files{c}{b};
+        CalcSW.name         = [genmap{c}.name '_' Annots.SW{c}{b}.name];
+        grid_file_pref = sprintf('%s/%s%s', outdir, outfile_pref, CalcSW.name);
         
-        Annots.SW{c}{b}.focals.gpos = applyGenmap2pos( genmap{c}, Annots.SW{c}{b}.focals.pos );
+        %       Annots.SW{c}{b}.file                                        = CalcSW.focals_table;
+        %       [Annots.SW{c}{b}.focals.pos, Annots.SW{c}{b}.focals.strand, Annots.SW{c}{b}.focals.isfake] = ...
+        %         textread( Annots.SW{c}{b}.file, '%d\t%c\t%d', 'commentstyle', 'shell' );
+        %       Annots.SW{c}{b}.focals.gpos  = applyGenmap2pos( genmap{c}, Annots.SW{c}{b}.focals.pos );
         
-        SWbase{c,b}      = SwCoef( CalcSW.FE_grid,       CalcSW.Ne0,  gFocGrid{c},  {Annots.SW{c}{b}.focals.gpos(Annots.SW{c}{b}.focals.isfake==0)}, CalcSW );
-        SWbase_fake      = SwCoef( CalcSW.FE_grid,       CalcSW.Ne0,  gFocGrid{c},  {Annots.SW{c}{b}.focals.gpos(Annots.SW{c}{b}.focals.isfake==1)}, CalcSW );
-        SWbase{c,b}.gSWj_fake = SWbase_fake.gSWj;
-        
-        te = SaveSWBase( grid_file_pref, gFocGrid{c}, SWbase{c,b} );
-        CalcSW.grid_files = te.outputfiles;
-        
-      else
-        
-        [SWbase{c,b}, gFocGrid{c}]      = LoadSWBase( grid_file_pref, CalcSW );
-        for k=1:length(gFocGrid{c}.pos)
-          gFocGrid{c}.gpos{k} = applyGenmap2pos( genmap{c}, gFocGrid{c}.pos{k} );
+        if ~CalcSW.skip_generate_maps
+          
+          Annots.SW{c}{b}.focals.gpos = applyGenmap2pos( genmap{c}, Annots.SW{c}{b}.focals.pos );
+          
+          SWbase{c,b}      = SwCoef( CalcSW.FE_grid,       CalcSW.Ne0,  gFocGrid{c},  {Annots.SW{c}{b}.focals.gpos(Annots.SW{c}{b}.focals.isfake==0)}, CalcSW );
+          SWbase_fake      = SwCoef( CalcSW.FE_grid,       CalcSW.Ne0,  gFocGrid{c},  {Annots.SW{c}{b}.focals.gpos(Annots.SW{c}{b}.focals.isfake==1)}, CalcSW );
+          SWbase{c,b}.gSWj_fake = SWbase_fake.gSWj;
+          
+          te = SaveSWBase( grid_file_pref, gFocGrid{c}, SWbase{c,b} );
+          CalcSW.grid_files = te.outputfiles;
+          
+        else
+          
+          [SWbase{c,b}, gFocGrid{c}]      = LoadSWBase( grid_file_pref, CalcSW );
+          for k=1:length(gFocGrid{c}.pos)
+            gFocGrid{c}.gpos{k} = applyGenmap2pos( genmap{c}, gFocGrid{c}.pos{k} );
+          end
+          
         end
-        
       end
-      
     end
   end
-
-    
+  
+  
   GEs.gFocGrid   = gFocGrid;
   GEs.SWbase     = SWbase;
   if CalcSW.skip_generate_maps
@@ -182,24 +182,24 @@ if ~isempty(BS_anno_files)
     CalcBS.chr_len     = chr_len(c);
     
     for b=1:length(BS_anno_tokens)
-      
-      CalcBS.output_token      = Annots.BS{c}{b}.output_token; %BS_anno_tokens{b};
-      CalcBS.cons_table   = Annots.BS{c}{b}.file; %BS_anno_files{c}{b}
-      CalcBS.name         = [genmap{c}.name '_' Annots.BS{c}{b}.name];
-      
-%       % NOTE: the annotations are loaded to 'Annots' in parallel to their
-%       % usage as inputs to 'generateBbase' through the files
-%       [~, Annots.BS{c}{b}.istart, Annots.BS{c}{b}.iend] = textread(CalcBS.cons_table, '%s\t%d\t%d'); %Annots.BS{c}{b}.file
-%       Annots.BS{c}{b}.anno_len           = sum(Annots.BS{c}{b}.iend-Annots.BS{c}{b}.istart+1);
-      
-      % this function EITHER LOADS the maps from files OR CALCULATES&WRITES them to files
-      [CalcBS, BSbase{c,b}]  = generateBbase(CalcBS, CalcBS.FE_grid, CalcBS.skip_generate_maps);
-      BSbase{c,b}.cfg = CalcBS;
-      BSbase{c,b}.cfg.anno_len = Annots.BS{c}{b}.anno_len;
-
+      if ~isempty(BS_anno_files{c}{b})
+        CalcBS.output_token      = Annots.BS{c}{b}.output_token; %BS_anno_tokens{b};
+        CalcBS.cons_table   = Annots.BS{c}{b}.file; %BS_anno_files{c}{b}
+        CalcBS.name         = [genmap{c}.name '_' Annots.BS{c}{b}.name];
+        
+        %       % NOTE: the annotations are loaded to 'Annots' in parallel to their
+        %       % usage as inputs to 'generateBbase' through the files
+        %       [~, Annots.BS{c}{b}.istart, Annots.BS{c}{b}.iend] = textread(CalcBS.cons_table, '%s\t%d\t%d'); %Annots.BS{c}{b}.file
+        %       Annots.BS{c}{b}.anno_len           = sum(Annots.BS{c}{b}.iend-Annots.BS{c}{b}.istart+1);
+        
+        % this function EITHER LOADS the maps from files OR CALCULATES&WRITES them to files
+        [CalcBS, BSbase{c,b}]  = generateBbase(CalcBS, CalcBS.FE_grid, CalcBS.skip_generate_maps);
+        BSbase{c,b}.cfg = CalcBS;
+        BSbase{c,b}.cfg.anno_len = Annots.BS{c}{b}.anno_len;
+      end
     end
   end
-    
+  
   
   GEs.BSbase      = BSbase;
   if CalcBS.skip_generate_maps

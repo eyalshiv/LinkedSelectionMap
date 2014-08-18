@@ -46,7 +46,7 @@ for c=cfg_inf.output.chromosomes
   [~, ~, stats.SWparams{c}, stats.BSparams{c}, DivRedPred{c}] = composePredictedDiversity2( GEs.SWbase(c:nSWannos:end), GEs.gFocGrid{c}, GEs.BSbase(c:nBSannos:end), params, cfg_inf.inf, positions{c}, EgMutDiv );
   
   % write to file
-  SaveLSMap( [outmap_pref '_' cfg_inf.chr_id{c}], DivRedPred{c}, cfg_inf.output.LSmap_res );
+  SaveLSMap( [outmap_pref cfg_inf.chr_id{c}], DivRedPred{c}, cfg_inf.output.LSmap_res );
   
 end
 

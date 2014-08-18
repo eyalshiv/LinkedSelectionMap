@@ -37,8 +37,8 @@ end
 % compose the basic map of coalescent due to BS - the minimal calculations possible
 cBS  = zeros([L 1]);
 for a=1:length(gBSj)
-  if sum( DivRedPred.params.BS.rel_u_t{a}(1:size(gBSj{a},1)) ) > 0
-    cBS = cBS + gBSj{a}' * DivRedPred.params.BS.rel_u_t{a}';%(2:2:10)';
+  if sum( DivRedPred.params.BS.w_t_rel{a}(1:size(gBSj{a},1)) ) > 0
+    cBS = cBS + gBSj{a}' * DivRedPred.params.BS.w_t_rel{a}';%(2:2:10)';
   end
 end
 
@@ -95,15 +95,15 @@ if ~only_calc_Red & isfield(DivRedPred.params, 'BS')
   
   for a=1:length(gBSj)
     
-    if sum( DivRedPred.params.BS.rel_u_t{a}(1:size(gBSj{a},1)) ) > 0
-      cBSan{a}    = gBSj{a}' * DivRedPred.params.BS.rel_u_t{a}';
+    if sum( DivRedPred.params.BS.w_t_rel{a}(1:size(gBSj{a},1)) ) > 0
+      cBSan{a}    = gBSj{a}' * DivRedPred.params.BS.w_t_rel{a}';
     else
       cBSan{a}    = zeros([L 1]);
     end
     
     for k=1:size(gBSj{a},1) %find(DivRedPred.params.BS.w_t{a}>0)
       if DivRedPred.params.BS.w_t{a}(k)>0
-        DivRedPred.BSj{a}(:,k) = exp(DivRedPred.params.BS.rel_u_t{a}(k) * gBSj{a}(k,:)');
+        DivRedPred.BSj{a}(:,k) = exp(DivRedPred.params.BS.w_t_rel{a}(k) * gBSj{a}(k,:)');
         %         DivRedPred.BSj{a}(:,k) = exp((DivRedPred.params.BS.u_del{a}/BSbase_params{a}.u(k)*DivRedPred.params.BS.w_t{a}(k)) * gBSj{a}(k,:)');
         DivRedPred.BSt(:,k)  = DivRedPred.BSt(:,k).* DivRedPred.BSj{a}(:,k);
       else

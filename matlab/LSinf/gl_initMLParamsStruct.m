@@ -15,9 +15,9 @@ MLParamsStruct.bsparam_annotations = 4;
 MLParamsStruct.bsparam_annolen = MLParamsStruct.bsparam_masses + 1;
 MLParamsStruct.length          = MLParamsStruct.bsparam_offset + (MLParamsStruct.bsparam_masses+1)*MLParamsStruct.bsparam_annotations;
 
-MLParamsStruct.swparam_imasses = MLParamsStruct.swparam_offset  + [0:MLParamsStruct.swparam_annotations-1]*MLParamsStruct.swparam_annolen + 1;
+MLParamsStruct.swparam_imasses = MLParamsStruct.swparam_offset  + 1 + [0:MLParamsStruct.swparam_annotations-1]*MLParamsStruct.swparam_annolen;
 MLParamsStruct.swparam_imaxu   = MLParamsStruct.swparam_imasses + MLParamsStruct.swparam_masses;
-MLParamsStruct.bsparam_imasses = MLParamsStruct.bsparam_offset  + [0:MLParamsStruct.bsparam_annotations-1]*MLParamsStruct.bsparam_annolen + 1;
+MLParamsStruct.bsparam_imasses = MLParamsStruct.bsparam_offset  + 1 + [0:MLParamsStruct.bsparam_annotations-1]*MLParamsStruct.bsparam_annolen;
 MLParamsStruct.bsparam_imaxu   = MLParamsStruct.bsparam_imasses + MLParamsStruct.bsparam_masses;
 
 
