@@ -1,0 +1,17 @@
+.outdir; E:/GitHub/LinkedSelectionMap/example/work/GEs/
+.outfile_pref; 
+.chr_features_file; E:/GitHub/LinkedSelectionMap/example/data/chromosomal_features_example.txt
+.chr_id| 2L
+.pos_grid_files| E:/GitHub/LinkedSelectionMap/example/data/annotations/SWbase_positions_2L.txt
+.genmap_files| E:/GitHub/LinkedSelectionMap/example/data/genetic_maps/genmap_Comeron_2L.txt
+.genmap_token; Comeron
+.SW_anno1_files| E:/GitHub/LinkedSelectionMap/example/data/annotations/substitutions_2L_exonicNS.txt
+.SW_anno2_files| E:/GitHub/LinkedSelectionMap/example/data/annotations/substitutions_2L_UTR.txt
+.SW_anno3_files| E:/GitHub/LinkedSelectionMap/example/data/annotations/substitutions_2L_intronic.txt
+.SW_anno4_files| 
+.SW_anno_tokens| exonicNS ! UTR ! intronic ! 
+.BS_anno1_files| E:/GitHub/LinkedSelectionMap/example/data/annotations/longest_transcript_533_exon_2L.coords
+.BS_anno2_files| E:/GitHub/LinkedSelectionMap/example/data/annotations/longest_transcript_533_UTR_2L.coords
+.BS_anno3_files| E:/GitHub/LinkedSelectionMap/example/data/annotations/longest_transcript_533_longintron_2L.coords
+.BS_anno4_files| E:/GitHub/LinkedSelectionMap/example/data/annotations/longest_transcript_533_intergenic_2L.coords
+.BS_anno_tokens| exons ! UTRs ! longintrons ! intergenic

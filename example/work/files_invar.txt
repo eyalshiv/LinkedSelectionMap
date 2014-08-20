@@ -1,0 +1,4 @@
+.poly| E:/GitHub/LinkedSelectionMap/example/data/neutral_variation/Filtered_140521_poly_2L.txt
+.mutprox| E:/GitHub/LinkedSelectionMap/example/data/neutral_variation/Filtered_140521_mutrate_2L.txt
+.genmap| E:/GitHub/LinkedSelectionMap/example/data/genetic_maps/genmap_Comeron_2L.txt
+.genmap_token; Comeron

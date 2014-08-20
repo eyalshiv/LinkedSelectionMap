@@ -1,0 +1,53 @@
+.inf.optim_algs; 1 , 2 , 3
+.inf.fmincon_retries; 0
+.inf.chromosomes; 1
+.inf.constraint_u; 0
+.inf.use_fake_subs; 1
+.inf.SWanno2param_mapping; 1 , 2 , 3
+.inf.BSanno2param_mapping; 1 , 2 , 3 , 4
+.inf.tau_sweeps; -1
+.inf.ratio_tau_mutprox_tau_sweeps; 3.250000e+00
+.inf.u_del_max; 6.800000e-09
+.inf.remote2closeDiv; 3.258300e+00
+.inf.predef_idx_train|
+.inf.init_params;
+.inf.fixed_params; 1 , 1 , 0 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 0 , 1 , 1
+.inf.opt_type| active-set ! interior-point ! sqp
+.chr_id| 2L
+.predef_idx_test|
+.chromosomes; 1
+.foc_rec_th_L; 7.500000e-01
+.foc_rec_th_H; Inf
+.rec_th_L; 7.500000e-01
+.rec_th_H; Inf
+.rec_pol_th_L; 7.500000e-01
+.rec_pol_th_H; Inf
+.gL_COL; 1.100000e-03
+.gdelta_COL; 1.000000e-06
+.sort_strand_dir; 1
+.halfway; 0
+.collated_weights; 0
+.scale_dS; 4.000000e-01
+.use_paml_dS; 1
+.min_paml_codons; 50
+.smoothgenmap; 1
+.smoothgenmap_win; 1.000000e-06
+.rec_spat_window; 100000
+.genmap_name; Comeron
+.output.LSmap_res; 100
+.output.chromosomes; 1
+.output.spatial_resolution; 1000
+.GEs.CalcSW.StopSum; 1
+.GEs.CalcSW.InterpMethod; linear
+.GEs.CalcSW.trap_aprx; diffusion
+.GEs.CalcSW.gMaxDistScaled; 1
+.GEs.CalcSW.gMaxDist; 1
+.GEs.CalcSW.FE_grid; 3.162278e-02 , 3.162278e-03
+.GEs.CalcSW.Ne0; 1140800
+.GEs.CalcSW.skip_generate_maps; 0
+.GEs.CalcSW.min_mapdist_SW_spat_grid; 3.000000e-08
+.GEs.CalcBS.FE_grid; 3.162278e-02 , 3.162278e-03
+.GEs.CalcBS.u_del; 3.500000e-09
+.GEs.CalcBS.skip_generate_maps; 0
+.GEs.CalcBS.B_res; 100
+.GEs.CalcBS.exe_file; E:\projects\sweeps\NeutFoc\BS_util\BSmap.exe

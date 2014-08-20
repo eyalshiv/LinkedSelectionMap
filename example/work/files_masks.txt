@@ -1,0 +1,2 @@
+.inference| E:/GitHub/LinkedSelectionMap/example/work/masks/codons_mask_inference_2L.txt
+.evaluation| E:/GitHub/LinkedSelectionMap/example/work/masks/codons_mask_evaluation_2L.txt
