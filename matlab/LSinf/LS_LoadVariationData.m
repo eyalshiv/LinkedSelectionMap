@@ -1,6 +1,13 @@
 
 function fdata = LS_LoadVariationData( inputfiles ) %inputfiles_file
 
+% inputs:
+% inputfiles - configuration files containing input file names (one per chromosome)
+% outputs:
+% fdata      - a struct containing all loaded variation data: genetic maps,
+%              polymorphism and local mutation rate estimates
+
+
 if isstr(inputfiles)
   inputfiles = file2struct( inputfiles );
 end

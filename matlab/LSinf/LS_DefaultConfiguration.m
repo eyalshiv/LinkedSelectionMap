@@ -1,11 +1,18 @@
 
 function ncfg   = LS_DefaultConfiguration( outfile, cfg )
 
+% This function creates a new full inference configuration struct or
+% updates/completes a given one.
+
+% inputs:
+% outfile    - output configuration file name
+% cfg        - existing configuration struct
+% outputs:
+% ncfg       - new/updated configuration struct
+
+
 global MLParamsStruct;
 gl_initMLParamsStruct();
-
-
-
 
 
 % Initialize all configuration fields (for both data processing, model inferece and model evaluation).
@@ -26,7 +33,7 @@ if ~isfield(ncfg,     'inf'),                   ncfg.inf= []; ,end
 if ~isfield(ncfg.inf, 'optim_algs'),            ncfg.inf.optim_algs = [1 2 3]; ,end
 if ~isfield(ncfg.inf, 'fmincon_retries '),      ncfg.inf.fmincon_retries = 0; ,end
 if ~isfield(ncfg.inf, 'chromosomes'),           ncfg.inf.chromosomes = [1 2 3 4]; ,end
-if ~isfield(ncfg.inf, 'constraint_u'),          ncfg.inf.constraint_u = 0; ,end % 2
+if ~isfield(ncfg.inf, 'constraint_u'),          ncfg.inf.constraint_u = 2; ,end
 if ~isfield(ncfg.inf, 'use_fake_subs'),         ncfg.inf.use_fake_subs     = 1;              ,end
 if ~isfield(ncfg.inf, 'SWanno2param_mapping'),  ncfg.inf.SWanno2param_mapping = [1 2 3 4]; ,end
 if ~isfield(ncfg.inf, 'BSanno2param_mapping'),  ncfg.inf.BSanno2param_mapping = [1 2 3 4]; ,end

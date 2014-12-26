@@ -1,7 +1,7 @@
 
 
 
-
+% root dir
 base_dir = 'E:/GitHub/LinkedSelectionMap/example';
 
 
@@ -9,15 +9,19 @@ base_dir = 'E:/GitHub/LinkedSelectionMap/example';
 
 %% chromosomes
 
+% a file containing a list of chromosomes and the length of each one in bp
 chr_features_file = [base_dir '/data/chromosomal_features_example.txt'];
 [chr_id, chr_len] = textread(chr_features_file, '%s %d', 'headerlines', 1);
 
+% the number of chromosomes
 C = length(chr_id);
+
 
 %% genetic maps
 
 genmap_token     = 'Comeron';
 for c=1:C
+  % genetic map file names for each chromosome
   genmap_files{c}     =  [base_dir sprintf('/data/genetic_maps/genmap_Comeron_%s.txt',chr_id{c})];
 end
 
@@ -25,11 +29,12 @@ end
 
 %% selection annotations and LS maps
 
+% enumerate CS annotations
 iSWAnnoExonicNS = 1;
 iSWAnnoUTR = 2;
 iSWAnnoIntronic = 3;
 
-
+% label CS annotations
 SW_anno_tokens    = {...
   'exonicNS',...
   'UTR',...
@@ -37,30 +42,36 @@ SW_anno_tokens    = {...
   '' };
 %   'intergenic' };
 
+% prefices of CS annotation (i.e. substitutions list) files
 SW_anno_fileprefs = {...
   [base_dir '/data/annotations/substitutions_exonicNS_'],...
   [base_dir '/data/annotations/substitutions_UTR_'],...
   [base_dir '/data/annotations/substitutions_intronic_'],...
   '' };
+% we have no data for substitutions at intergenic regions
 %  [base_dir '/data/annotations/substitutions_intergenic_'] };
 
+% enumerate BS annotations
 iBSAnnoExonic = 1;
 iBSAnnoUTR = 2;
 iBSAnnoIntronic = 3;
 iBSAnnoIntergenic = 4;
 
+% label BS annotations
 BS_anno_tokens    = {...
   'exons',...
   'UTRs',...
   'longintrons',...
   'intergenic'};
+
+% prefices of BS annotation (i.e. conserved segments) files
 BS_anno_fileprefs = {...
   [base_dir '/data/annotations/longest_transcript_533_exon_'],...
   [base_dir '/data/annotations/longest_transcript_533_UTR_'],...
   [base_dir '/data/annotations/longest_transcript_533_longintron_'],...
   [base_dir '/data/annotations/longest_transcript_533_intergenic_'] };
 
-
+% prepare the file names of all annotations across all chromosomes
 for c=1:C
 %   for b=1:length(BS_anno_tokens)
     BS_anno1_files{c} = '';
@@ -85,7 +96,7 @@ for c=1:C
 %   end
 end
 
-
+% prepare CS grid file names (these are lists of positions at which to calculate the efects of CS, instead of using a fixed-distance grid)
 for c=1:C
   SWbase_pos_grid_files{c} = [base_dir '/data/annotations/SWbase_positions_' chr_id{c} '.txt'];
 end
@@ -100,12 +111,14 @@ end
 %                     [base_dir sprintf('/data/Bailor/strains/Bailor_%s_output3.txt', chr_id{c})]};
 % end
 
+% prepare file names of polymorphism data and approximated local mutation
+% rates
 for c=1:C
   poly_proc_files{c}       = [base_dir sprintf('/data/neutral_variation/Filtered_140521_poly_%s.txt',    chr_id{c})];
   MutProx_proc_files{c}    = [base_dir sprintf('/data/neutral_variation/Filtered_140521_mutrate_%s.txt', chr_id{c})];
 end
 
-
+% prepare mask files for the inference and for goodness-of-fit evaluation
 for c=1:C
   inference_mask_files{c}       = [base_dir sprintf('/work/masks/codons_mask_inference_%s.txt',  chr_id{c})];
   evaluation_mask_files{c}      = [base_dir sprintf('/work/masks/codons_mask_evaluation_%s.txt', chr_id{c})];
@@ -113,7 +126,7 @@ for c=1:C
 end
 
 
-
+% wrap all relevant input and output filenames in a configuration struct
 infcfg_file = [base_dir '/work/example_cfg.txt'];
 
 files_invar.poly           = poly_proc_files;

@@ -1,6 +1,11 @@
 
 function calc  = LS_InferModel( outfile_pref, fdata, GEs, cfg_inf, masks )
 
+% This function wraps the inference procedure, given prepared input
+% structs of variations data (fdata), including grid elements (GEs), an
+% inference configuration struct, and if supplied, masks pointing which codons to use. 
+
+
 global MLParamsStruct;
 
 
@@ -72,20 +77,12 @@ end
 
 % fix&null all weights that do not correspond to a vector in GEs (in case we have less than 11 point masses per some annotation)
 for k=1:MLParamsStruct.bsparam_annotations
-  if k<=size(GEs.BSbase,2) && ~isempty(GEs.BSbase{1,k})
-    pidx = MLParamsStruct.bsparam_imasses(k)+[length(GEs.BSbase{1,k}.cfg.FE_grid):MLParamsStruct.bsparam_masses-1];
-  else
-    pidx = MLParamsStruct.bsparam_imasses(k)+[0:MLParamsStruct.bsparam_masses-1];
-  end
+  pidx = MLParamsStruct.bsparam_imasses(k)+[length(GEs.BSbase{1,k}.cfg.FE_grid):MLParamsStruct.bsparam_masses-1];
   bnd_t_dist.fixed(pidx) = 1;
   bnd_t_dist.init(pidx)  = MLParamsStruct.minimal_log10_t;
 end
 for k=1:MLParamsStruct.swparam_annotations
-  if k<=size(GEs.SWbase,2) && ~isempty(GEs.SWbase{1,k})
-    pidx = MLParamsStruct.swparam_imasses(k)+[length(GEs.SWbase{1,k}.cfg.FE_grid):MLParamsStruct.swparam_masses-1];
-  else
-    pidx = MLParamsStruct.swparam_imasses(k)+[0:MLParamsStruct.swparam_masses-1];
-  end
+  pidx = MLParamsStruct.swparam_imasses(k)+[length(GEs.SWbase{1,k}.cfg.FE_grid):MLParamsStruct.swparam_masses-1];
   bnd_t_dist.fixed(pidx) = 1;
   bnd_t_dist.init(pidx)  = 0;
 end

@@ -3,6 +3,9 @@ function [neg_log_P, neg_log_samples, stats, vlogL] = logCL_SW(preCalc, full_par
 
 global MLParamsStruct;
 
+% To prevent zero probability of observing a SNP (which would ruin the
+% maximization) we put a lower bound on the relative predicted diversity to
+% be 0.1% of the maximal value (=1).
 minRed = 0.001;
 
 calc_stats = (nargout > 2);
@@ -22,6 +25,9 @@ iC = config.chromosomes;
 
 TAU_div     = params(3);
 
+% A patch to push the maximization algorithm out of regions in the
+% parameter space where it estimates for some reason some of the parameters
+% as NaN.
 if sum(isnan(params))
   neg_log_P = 100000000000000000000;
   return;
@@ -59,6 +65,9 @@ for c=iC
   neg_log_P       = neg_log_P       + cneg_log_P{c};
 end
 
+% A patch to prevent too low likelihood values, for numeric reasons. This
+% patch is complemented by a corresponding division by 10^5 at the
+% encapsulating level.
 neg_log_P = neg_log_P/neg_log_samples(1) * 10^5;
 
 % if isnan(neg_log_P) | isinf(neg_log_P)

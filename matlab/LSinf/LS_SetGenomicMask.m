@@ -2,6 +2,9 @@
 
 function masks = LS_SetGenomicMask( codonmask_files, cfg_inf )
 
+% This function loads masks marking which codons to use in the
+% inference/evaluation.
+
 
 Ci = length(cfg_inf.inf.chromosomes);
 Ce = length(cfg_inf.chromosomes);
