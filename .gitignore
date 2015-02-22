@@ -34,3 +34,20 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+*.sdf
+*.suo
+*.old
+*.filters
+*.user
+*.obj
+*.manifest
+*.lastbuildstate
+*.cache
+*.tlog
+*.pdb
+*.ilk
+*.sw
+*.LS
+*.bkgd
+*.coords
