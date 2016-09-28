@@ -1,3 +1,12 @@
+IMPORTANT NOTE - THIS IS NOW AN OBSOLETE VERSION OF THE REPO.
+PLEASE USE THE UP-TO-DATE REPO:
+https://github.com/sellalab/LinkedSelectionMaps/
+Eyal Elyashiv
+September 2016
+
+
+
+
 
 How to use this example package:
 
